@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,6 +13,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
+import Axios from "axios";
+import instance from "./authRequest";
 
 function Copyright() {
   return (
@@ -26,6 +28,28 @@ function Copyright() {
     </Typography>
   );
 }
+
+const [email, setEmail] = useState();
+const [password, setPassword] = useState();
+
+const handleClick = async (e) => {
+  e.preventDefault(e);
+  console.log(email);
+  const response = await Axios.post("http://localhost:2513/signin", {
+    username: email,
+    password: password,
+  });
+  localStorage.setItem("token", response.data.token);
+  localStorage.setItem("refreshToken", response.data.refreshToken);
+  console.log(response);
+};
+
+const handleApp = async (e) => {
+  e.preventDefault(e);
+  const answer = await instance.get("/user");
+
+  console.log(answer);
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
