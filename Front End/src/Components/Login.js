@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
-import instance from "./authRequest";
+import instance from "./authReq";
 
 function Copyright() {
   return (
